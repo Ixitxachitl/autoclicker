@@ -58,7 +58,7 @@ def main():
     root.resizable(0,0)
     app = Example(root)
     w = 200 # width for the Tk root
-    h = 25 # height for the Tk root
+    h = 30 # height for the Tk root
 
     ws = root.winfo_screenwidth() # width of the screen
     hs = root.winfo_screenheight() # height of the screen
