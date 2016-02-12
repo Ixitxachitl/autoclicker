@@ -23,17 +23,29 @@ class Example(Frame):
         self.style.theme_use("default")
 
         self.pack(fill=BOTH, expand=True)
+        self.parent.bind("<Escape>", self.bindExit)
 
         closeButton = Button(self, text="Close", command=self.sysExit)
         closeButton.pack(side=RIGHT, padx=5, pady=5)
-        startButton = Button(self, text="Toggle", command=self.startClick)
+        startButton = Button(self, text="Start", command=self.startClick)
         startButton.pack(side=LEFT, padx=5, pady=5)
+        startButton.bind("<Button-1>", self.buttonText)
 
+    def bindExit(self, e):
+        self.sysExit()
+        return
+    
     def sysExit(self):
         global running
         running = 0
-        raise SystemExit
-
+        self.quit()
+        
+    def buttonText(self, event):
+        if event.widget["text"] == "Start":
+            event.widget.config(text="Stop")
+        else:
+            event.widget.config(text="Start")
+            
     def startClick(self):
         global running
         if running == 0:
