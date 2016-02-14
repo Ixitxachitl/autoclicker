@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pyautogui, time, threading, sys
-from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, Toplevel, BitmapImage
+from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage
 from tkinter.ttk import Label, Button, Style, Frame
 import tkinter as tk
 
@@ -50,7 +50,9 @@ class autoClicker(Toplevel):
         closeBox = BitmapImage(data=CLOSEBOX)
         
         barFrame = Frame(self)
-        barFrame.pack(pady=(1,0))
+        barFrame.pack(side=TOP, fill="x", padx=1, pady=1)
+        buttonFrame = Frame(self)
+        buttonFrame.pack(side=BOTTOM, fill="x", padx=1, pady=(0,1))
         
         self.grip = Label(barFrame, image=gripBar)
         self.grip.image=gripBar
@@ -69,12 +71,12 @@ class autoClicker(Toplevel):
         self.wm_attributes("-topmost", 1)
         self.resizable(0,0)
 
-        self.startButton = Button(self, text="Start")
-        self.startButton.pack(side=BOTTOM, fill="both", padx=1, pady=(0,1))
+        self.startButton = Button(buttonFrame, text="Start")
+        self.startButton.pack(fill="both")
         self.startButton.bind("<Button-1>", self.startClick)
                 
-        w = 120
-        h = 42
+        w = 115
+        h = 40
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
