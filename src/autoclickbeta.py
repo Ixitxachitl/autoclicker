@@ -34,10 +34,10 @@ static unsigned char grip_bits[] = {
 };
 """
 
-class autoClicker(Toplevel):
+class autoClicker(Frame):
   
     def __init__(self, parent):
-        Toplevel.__init__(self, parent)   
+        Frame.__init__(self, parent)   
         self.parent = parent
         self.initUI()
     
@@ -45,15 +45,15 @@ class autoClicker(Toplevel):
         global running
         running = 0
                 
-        self.overrideredirect(True)
+        self.parent.overrideredirect(True)
         
         gripBar = BitmapImage(data=GRIPBAR)
         closeBox = BitmapImage(data=CLOSEBOX)
         
-        barFrame = Frame(self,relief=GROOVE)
-        barFrame.pack(side=TOP, fill="x", padx=1, pady=1)
-        buttonFrame = Frame(self,relief=GROOVE)
-        buttonFrame.pack(side=BOTTOM, fill=BOTH, padx=1, pady=(0,1))
+        barFrame = Frame(self)
+        barFrame.pack(side=TOP, fill="x")
+        buttonFrame = Frame(self)
+        buttonFrame.pack(side=BOTTOM, fill=BOTH, pady=(0,1))
         
         self.grip = Label(barFrame, image=gripBar)
         self.grip.image=gripBar
@@ -64,17 +64,18 @@ class autoClicker(Toplevel):
         
         self.closeButton = Label(barFrame, image=closeBox)
         self.closeButton.image=closeBox
-        self.closeButton.pack(side=RIGHT, fill="none", padx=(0,1))
+        self.closeButton.pack(side=RIGHT, fill="none")
         self.closeButton.bind("<ButtonPress-1>", self.sysExit)
         
         self.style = Style()
         self.style.theme_use("default")
-        self.wm_attributes("-topmost", 1)
-        self.resizable(0,0)
+        self.parent.wm_attributes("-topmost", 1)
+        self.parent.resizable(0,0)
 
-        self.startButton = Button(buttonFrame, text="Start", relief=GROOVE)
+        self.startButton = Button(buttonFrame, text="Start", relief=GROOVE, takefocus=True)
         self.startButton.pack(fill=BOTH, expand=1)
         self.startButton.bind("<Button-1>", self.startClick)
+        #self.startButton.bind("<space>", self.startClick)
                 
         w = 116
         h = 40
@@ -84,22 +85,21 @@ class autoClicker(Toplevel):
 
         x = (ws/2) - (w/2)
         y = (hs/2) - (h/2)
-        
-        self.protocol("WM_DELETE_WINDOW", self.sysExit)
 
-        self.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        self.config(bg="black")
+        self.parent.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        self.parent.config(bg="black")
+        self.pack(fill="both", padx=1, pady=1)
 
     def startMove(self,e):
-        self.x = e.x
-        self.y = e.y
+        self.parent.x = e.x
+        self.parent.y = e.y
         
     def onMotion(self, e):
-        deltax = e.x - self.x
-        deltay = e.y - self.y
-        x = self.winfo_x() + deltax
-        y = self.winfo_y() + deltay
-        self.geometry("+%s+%s" % (x, y))
+        deltax = e.x - self.parent.x
+        deltay = e.y - self.parent.y
+        x = self.parent.winfo_x() + deltax
+        y = self.parent.winfo_y() + deltay
+        self.parent.geometry("+%s+%s" % (x, y))
         
     def stopMove(self, e):
         e.x = None
@@ -133,9 +133,8 @@ class autoClicker(Toplevel):
 
 def main():
     root = Tk()
-    root.protocol("WM_DELETE_WINDOW", autoClicker.sysExit)   
     app = autoClicker(root)
-    root.withdraw()    
+    #root.withdraw()    
     root.mainloop()
 
 if __name__ == "__main__":
