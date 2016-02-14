@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import pyautogui, time, threading, sys
+import pyautogui, time, threading, sys, asyncio
 from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage, GROOVE, CENTER, Button, FLAT
 from tkinter.ttk import Label, Style, Frame
 import tkinter as tk
@@ -72,7 +72,7 @@ class autoClicker(Frame):
         self.parent.wm_attributes("-topmost", 1)
         self.parent.resizable(0,0)
 
-        self.startButton = Button(buttonFrame, text="Start", relief=FLAT)
+        self.startButton = Button(buttonFrame, text="Start", relief=FLAT, activebackground="lightgrey")
         self.startButton.pack(fill=BOTH, expand=1)
         self.startButton.bind("<Button-1>", self.startClick)
         #self.startButton.bind("<space>", self.startClick)
@@ -112,6 +112,7 @@ class autoClicker(Frame):
             
     def startClick(self, event):
         global running
+        self.startButton.flash()
         if running == 0:
             running = 1
             event.widget.config(text="Stop")
