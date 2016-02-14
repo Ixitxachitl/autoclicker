@@ -112,7 +112,6 @@ class autoClicker(Frame):
             
     def startClick(self, event):
         global running
-        self.startButton.flash()
         if running == 0:
             running = 1
             event.widget.config(text="Stop")
@@ -123,6 +122,7 @@ class autoClicker(Frame):
             running = 0
             event.widget.config(text="Start")
             time.sleep(0.5)
+        self.startButton.flash()
 
     def startLoop(self):
         global running
