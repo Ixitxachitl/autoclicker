@@ -50,18 +50,18 @@ class autoClicker(Toplevel):
         closeBox = BitmapImage(data=CLOSEBOX)
         
         barFrame = Frame(self)
-        barFrame.pack(padx=1, pady=1)
+        barFrame.pack(pady=(1,0))
         
         self.grip = Label(barFrame, image=gripBar)
         self.grip.image=gripBar
-        self.grip.pack(side=LEFT, fill="none")
+        self.grip.pack(side=LEFT, fill="x")
         self.grip.bind("<ButtonPress-1>", self.startMove)
         self.grip.bind("<ButtonRelease-1>", self.stopMove)
         self.grip.bind("<B1-Motion>", self.onMotion)
         
         self.closeButton = Label(barFrame, image=closeBox)
         self.closeButton.image=closeBox
-        self.closeButton.pack(side=RIGHT, fill="none", padx = 1)
+        self.closeButton.pack(side=RIGHT, fill="none")
         self.closeButton.bind("<ButtonPress-1>", self.sysExit)
         
         self.style = Style()
@@ -70,11 +70,11 @@ class autoClicker(Toplevel):
         self.resizable(0,0)
 
         self.startButton = Button(self, text="Start")
-        self.startButton.pack(side=BOTTOM, fill="both")
+        self.startButton.pack(side=BOTTOM, fill="both", padx=1, pady=(0,1))
         self.startButton.bind("<Button-1>", self.startClick)
                 
         w = 120
-        h = 40
+        h = 42
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
@@ -85,6 +85,7 @@ class autoClicker(Toplevel):
         self.protocol("WM_DELETE_WINDOW", self.sysExit)
 
         self.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        self.config(bg="black")
 
     def startMove(self,e):
         self.x = e.x
