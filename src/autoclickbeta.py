@@ -63,7 +63,7 @@ class autoClicker(Toplevel):
         
         self.closeButton = Label(barFrame, image=closeBox)
         self.closeButton.image=closeBox
-        self.closeButton.pack(side=RIGHT, fill="none")
+        self.closeButton.pack(side=RIGHT, fill="none", padx=(0,1))
         self.closeButton.bind("<ButtonPress-1>", self.sysExit)
         
         self.style = Style()
@@ -75,7 +75,7 @@ class autoClicker(Toplevel):
         self.startButton.pack(fill="both")
         self.startButton.bind("<Button-1>", self.startClick)
                 
-        w = 115
+        w = 116
         h = 40
 
         ws = self.winfo_screenwidth() # width of the screen
