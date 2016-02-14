@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pyautogui, time, threading, sys
-from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage, GROOVE, CENTER, Button
+from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage, GROOVE, CENTER, Button, FLAT
 from tkinter.ttk import Label, Style, Frame
 import tkinter as tk
 
@@ -51,9 +51,9 @@ class autoClicker(Frame):
         closeBox = BitmapImage(data=CLOSEBOX)
         
         barFrame = Frame(self)
-        barFrame.pack(side=TOP, fill="x")
-        buttonFrame = Frame(self)
-        buttonFrame.pack(side=BOTTOM, fill=BOTH, pady=(0,1))
+        barFrame.pack(side=TOP, fill=BOTH, pady=(0,1))
+        buttonFrame = Frame(self, relief=GROOVE)
+        buttonFrame.pack(side=BOTTOM, fill=BOTH, padx=1, pady=(0,1))
         
         self.grip = Label(barFrame, image=gripBar)
         self.grip.image=gripBar
@@ -72,7 +72,7 @@ class autoClicker(Frame):
         self.parent.wm_attributes("-topmost", 1)
         self.parent.resizable(0,0)
 
-        self.startButton = Button(buttonFrame, text="Start", relief=GROOVE, takefocus=True)
+        self.startButton = Button(buttonFrame, text="Start", relief=FLAT)
         self.startButton.pack(fill=BOTH, expand=1)
         self.startButton.bind("<Button-1>", self.startClick)
         #self.startButton.bind("<space>", self.startClick)
