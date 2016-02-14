@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import pyautogui, time, threading, sys
-from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage
-from tkinter.ttk import Label, Button, Style, Frame
+from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage, GROOVE, CENTER, Button
+from tkinter.ttk import Label, Style, Frame
 import tkinter as tk
 
 CLOSEBOX = """
@@ -50,10 +50,10 @@ class autoClicker(Toplevel):
         gripBar = BitmapImage(data=GRIPBAR)
         closeBox = BitmapImage(data=CLOSEBOX)
         
-        barFrame = Frame(self)
+        barFrame = Frame(self,relief=GROOVE)
         barFrame.pack(side=TOP, fill="x", padx=1, pady=1)
-        buttonFrame = Frame(self)
-        buttonFrame.pack(side=BOTTOM, fill="x", padx=1, pady=(0,1))
+        buttonFrame = Frame(self,relief=GROOVE)
+        buttonFrame.pack(side=BOTTOM, fill=BOTH, padx=1, pady=(0,1))
         
         self.grip = Label(barFrame, image=gripBar)
         self.grip.image=gripBar
@@ -72,8 +72,8 @@ class autoClicker(Toplevel):
         self.wm_attributes("-topmost", 1)
         self.resizable(0,0)
 
-        self.startButton = Button(buttonFrame, text="Start")
-        self.startButton.pack(fill="both")
+        self.startButton = Button(buttonFrame, text="Start", relief=GROOVE)
+        self.startButton.pack(fill=BOTH, expand=1)
         self.startButton.bind("<Button-1>", self.startClick)
                 
         w = 116
