@@ -115,14 +115,15 @@ class autoClicker(Frame):
         if running == 0:
             running = 1
             event.widget.config(text="Stop")
+            self.startButton.flash()
             currentMouseX, currentMouseY = pyautogui.position()
             pyautogui.moveTo(currentMouseX, currentMouseY+50)
             threading.Thread(target=self.startLoop, args=()).start()
         else:
             running = 0
             event.widget.config(text="Start")
+            self.startButton.flash()
             time.sleep(1)
-        self.startButton.flash()
 
     def startLoop(self):
         global running
