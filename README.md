@@ -9,7 +9,10 @@ You can also run the script directly:
 >>>python3 autoclick.py
 
 Requirements:
-  Windows:  Python for Windows:
+
+  Windows:
+  
+            Python for Windows:
             (I used python 3.5 but any version of python 3.x should work or 2.x with some minor changes)
             https://www.python.org/downloads/
   
@@ -24,7 +27,9 @@ Requirements:
             c:\path\to\pip install pillow
             c:\path\to\pip install pyautogui
   
-  Ubuntu:   Python 3:
+  Ubuntu:
+  
+            Python 3:
             sudo apt-get install python3.5
             
             Python tk:
@@ -33,7 +38,7 @@ Requirements:
             Pip 3:
             sudo apt-get install python3-pip
             
-            PyAutoGui
+            PyAutoGui:
             pip3 install pillow
             pip3 install pyautogui
             
