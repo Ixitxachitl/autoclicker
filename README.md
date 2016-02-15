@@ -1,6 +1,6 @@
 # autoclicker
 
-Download Executable and click toggle to start clicking.
+Download Executable and click Start to start clicking, move your mouse over Stop to stop.
 Note: Current version clicks left mouse button and than middle mouse button and after a (very) short dely repeats until the start/stop button or close button is pressed.
 
 Designed to click on cookies: http://orteil.dashnet.org/cookieclicker/
