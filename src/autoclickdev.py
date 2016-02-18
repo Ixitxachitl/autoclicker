@@ -161,8 +161,8 @@ class autoClicker(Frame):
         self.barFrame.pack(side=TOP, fill=BOTH, pady=(0,1))
         self.clickFrame = Frame(self)
         self.clickFrame.pack(fill=BOTH, padx=12, pady=(0,1), anchor=CENTER)
-        self.buttonFrame = Frame(self, relief=GROOVE)
-        self.buttonFrame.pack(side=BOTTOM, fill=BOTH, padx=1, pady=(0,1))
+        self.buttonFrame = Frame(self, relief=GROOVE, borderwidth=0)
+        self.buttonFrame.pack(side=BOTTOM, fill=BOTH, expand=1, padx=1)
         
         self.grip = Label(self.barFrame, image=self.gripBar)
         self.grip.image=self.gripBar
@@ -193,13 +193,13 @@ class autoClicker(Frame):
         self.rightClickToggle.pack(side=LEFT, expand=1)
         self.rightClickToggle.bind("<Button-1>", self.rightToggle)
 
-        self.startButton = Button(self.buttonFrame, text="Start", relief=FLAT, activebackground="lightgrey")
+        self.startButton = Button(self.buttonFrame, text="Start", relief=FLAT, activebackground="lightgrey", borderwidth=0)
         self.startButton.pack(fill=BOTH, expand=1)
         self.startButton.bind("<Button-1>", self.startClick)
         self.startButton.bind("<space>", self.startClick)
                 
         w = 116
-        h = 64
+        h = 58
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
