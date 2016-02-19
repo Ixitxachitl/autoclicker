@@ -156,12 +156,12 @@ class autoClicker(Frame):
         
         self.barFrame = Frame(self)
         self.barFrame.pack(side=TOP, fill=BOTH)
-
-        self.sliderScale = Scale(self, from_=0, to=1, resolution=.01, orient=HORIZONTAL, borderwidth=0)
-        self.sliderScale.pack(side=TOP, fill="x", expand=1)
-
         self.clickFrame = Frame(self, borderwidth=0)
         self.clickFrame.pack(side=TOP, fill=BOTH, padx=12, expand=1)
+
+        self.sliderScale = Scale(self, from_=0, to=1, resolution=.01, orient=HORIZONTAL, borderwidth=0, showvalue=0)
+        self.sliderScale.pack(side=TOP, fill="x", expand=1)
+        
         self.buttonFrame = Frame(self, borderwidth=0)
         self.buttonFrame.pack(side=TOP, fill=BOTH, expand=1)
         
@@ -200,7 +200,7 @@ class autoClicker(Frame):
         self.startButton.bind("<space>", self.startClick)
                 
         w = 116
-        h = 94
+        h = 74
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
