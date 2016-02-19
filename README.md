@@ -42,4 +42,5 @@ Requirements:
             pip3 install pillow
             pip3 install pyautogui
             
+Mac OS users: You can run this script directly by installing python 3.x, tkinter modual and pyautogui but as I do not have an osx device I am unable to pre-compile this for you and do not have detailed instructions.  That being said, I'm sure the instalation process is pretty strait forward and if someone with an osx device is willing to step forward i'd be happy to have someone compile it for me.  Because pyinstaller is not a cross compiler, in order to have an osx executable it must be compiled on the target device or a virtual environment such as the way I compile the windows executable using wine.
 If you notice any errors in my instalation process or have any tips let me know and I'll fix it, Thanks!
