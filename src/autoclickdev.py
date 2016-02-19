@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pyautogui, time, threading, sys
-from tkinter import Tk, BOTH, LEFT, BOTTOM, RIGHT, TOP, Toplevel, BitmapImage, GROOVE, CENTER, Button, FLAT
+from tkinter import *
 from tkinter.ttk import Label, Style, Frame
 import tkinter as tk
 
@@ -132,14 +132,11 @@ class autoClicker(Frame):
         self.initUI()
     
     def initUI(self):
-        global running
-        global leftclick
-        global middleclick
-        global rightclick
-        running = 0
-        leftclick = 0
-        middleclick = 0
-        rightclick = 0
+        self.sliderTime=0
+        self.running = 0
+        self.leftclick = 0
+        self.middleclick = 0
+        self.rightclick = 0
                 
         self.parent.overrideredirect(True)
         self.style = Style()
@@ -158,11 +155,15 @@ class autoClicker(Frame):
         self.rightClickDown = BitmapImage(data=RIGHTCLICKDOWN)
         
         self.barFrame = Frame(self)
-        self.barFrame.pack(side=TOP, fill=BOTH, pady=(0,1))
-        self.clickFrame = Frame(self)
-        self.clickFrame.pack(fill=BOTH, padx=12, pady=(0,1), anchor=CENTER)
-        self.buttonFrame = Frame(self, relief=GROOVE, borderwidth=0)
-        self.buttonFrame.pack(side=BOTTOM, fill=BOTH, expand=1, padx=1)
+        self.barFrame.pack(side=TOP, fill=BOTH)
+
+        self.sliderScale = Scale(self, from_=0, to=1, resolution=.01, orient=HORIZONTAL, borderwidth=0)
+        self.sliderScale.pack(side=TOP, fill="x", expand=1)
+
+        self.clickFrame = Frame(self, borderwidth=0)
+        self.clickFrame.pack(side=TOP, fill=BOTH, padx=12, expand=1)
+        self.buttonFrame = Frame(self, borderwidth=0)
+        self.buttonFrame.pack(side=TOP, fill=BOTH, expand=1)
         
         self.grip = Label(self.barFrame, image=self.gripBar)
         self.grip.image=self.gripBar
@@ -199,7 +200,7 @@ class autoClicker(Frame):
         self.startButton.bind("<space>", self.startClick)
                 
         w = 116
-        h = 58
+        h = 94
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
@@ -212,37 +213,31 @@ class autoClicker(Frame):
         self.pack(fill="both", padx=1, pady=1)
         
     def leftToggle(self,event):
-        global running
-        global leftclick
-        if running == 0:
-            if leftclick == 0:
+        if self.running == 0:
+            if self.leftclick == 0:
                 event.widget.configure(image=self.leftClickDown)
-                leftclick = 1;
+                self.leftclick = 1;
             else:
                 event.widget.configure(image=self.leftClick)
-                leftclick = 0;
+                self.leftclick = 0;
                 
     def middleToggle(self,event):
-        global running
-        global middleclick
-        if running == 0:
-            if middleclick == 0:
+        if self.running == 0:
+            if self.middleclick == 0:
                 event.widget.configure(image=self.middleClickDown)
-                middleclick = 1;
+                self.middleclick = 1;
             else:
                 event.widget.configure(image=self.middleClick)
-                middleclick = 0;
+                self.middleclick = 0;
                 
     def rightToggle(self,event):
-        global running
-        global rightclick
-        if running == 0:
-            if rightclick == 0:
+        if self.running == 0:
+            if self.rightclick == 0:
                 event.widget.configure(image=self.rightClickDown)
-                rightclick = 1;
+                self.rightclick = 1;
             else:
                 event.widget.configure(image=self.rightClick)
-                rightclick = 0;
+                self.rightclick = 0;
 
     def onHover(self,event):
         event.widget.configure(image=self.closeHover)
@@ -266,40 +261,32 @@ class autoClicker(Frame):
         event.y = None
 
     def sysExit(self, event):
-        global running
-        running = 0
+        self.running = 0
         sys.exit()
             
     def startClick(self, event):
-        global running
-        global leftclick
-        global miffleclick
-        global rightclick
-        if running == 0 and not (leftclick == 0 and middleclick==0 and rightclick == 0):
-            running = 1
+        if self.running == 0 and not (self.leftclick == 0 and self.middleclick==0 and self.rightclick == 0):
+            self.running = 1
             event.widget.config(text="Stop")
             currentMouseX, currentMouseY = pyautogui.position()
             pyautogui.moveTo(currentMouseX, currentMouseY+50)
             threading.Thread(target=self.startLoop, args=()).start()
         else:
-            running = 0
+            self.running = 0
             event.widget.config(text="Start")
         time.sleep(0.2)
         return
 
     def startLoop(self):
-        global running
-        global leftclick
-        global miffleclick
-        global rightclick
-        while running == 1:
-            if leftclick == 1:
+        while self.running == 1:
+            if self.leftclick == 1:
                 pyautogui.click()
-            if middleclick == 1:
+            if self.middleclick == 1:
                 pyautogui.click(button="middle")
-            if rightclick == 1:
+            if self.rightclick == 1:
                 pyautogui.click(button="right")
-            time.sleep(0.0001)
+            delay = self.sliderScale.get()
+            time.sleep(delay)
         return
     
 def main():
