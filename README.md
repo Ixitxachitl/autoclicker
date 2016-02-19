@@ -6,7 +6,7 @@ Note: Current version clicks left mouse button and than middle mouse button and 
 Designed to click on cookies: http://orteil.dashnet.org/cookieclicker/
 
 You can also run the script directly:
->>>python3 autoclick.py
+>>>python3 autoclick<version>.py
 
 Requirements:
 
