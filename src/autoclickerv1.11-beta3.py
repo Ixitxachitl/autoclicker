@@ -35,7 +35,7 @@ class autoClicker(Frame):
         self.rightClickDown = tk.PhotoImage(file='resources/rightclickdown.png')
         
         self.barFrame = Frame(self)
-        self.barFrame.pack(side=TOP, fill=BOTH)
+        self.barFrame.pack(side=TOP, fill=BOTH, pady="1")
         self.clickFrame = Frame(self, borderwidth=0, bg='white')
         self.clickFrame.pack(side=TOP, fill=BOTH, padx=12, expand=1)
 
@@ -45,14 +45,14 @@ class autoClicker(Frame):
         self.buttonFrame = Frame(self, borderwidth=0)
         self.buttonFrame.pack(side=TOP, fill=BOTH, expand=1)
         
-        self.grip = tk.Label(self.barFrame, image=self.gripBar)
-        self.grip.pack(side=LEFT, fill="x")
+        self.grip = tk.Label(self.barFrame, image=self.gripBar, borderwidth=0)
+        self.grip.pack(side=LEFT, fill="x", padx=(1,0))
         self.grip.bind("<ButtonPress-1>", self.startMove)
         self.grip.bind("<ButtonRelease-1>", self.stopMove)
         self.grip.bind("<B1-Motion>", self.onMotion)
         
-        self.closeButton = tk.Label(self.barFrame, image=self.closeBox)
-        self.closeButton.pack(side=RIGHT, fill="none")
+        self.closeButton = tk.Label(self.barFrame, image=self.closeBox, borderwidth=0)
+        self.closeButton.pack(side=LEFT, fill="x", padx="1")
         self.closeButton.bind("<ButtonPress-1>", self.sysExit)
         self.closeButton.bind("<Enter>", self.onHover)
         self.closeButton.bind("<Leave>", self.onLeave)
@@ -74,7 +74,7 @@ class autoClicker(Frame):
         self.startButton.bind("<Button-1>", self.startClick)
         self.startButton.bind("<<hotkey>>", self.startClick)
                 
-        self.w = 116
+        self.w = 115
         self.h = 74
 
         ws = self.winfo_screenwidth() # width of the screen
