@@ -24,18 +24,18 @@ class autoClicker(Frame):
         self.parent.wm_attributes("-topmost", 1)
         self.parent.resizable(0,0)
         
-        self.gripBar = tk.PhotoImage(file='resources/bar.png')
-        self.closeBox = tk.PhotoImage(file='resources/close.png')
-        self.closeHover = tk.PhotoImage(file='resources/closehover.png')
-        self.leftClick = tk.PhotoImage(file='resources/leftclick.png')
-        self.leftClickDown = tk.PhotoImage(file='resources/leftclickdown.png')
-        self.middleClick = tk.PhotoImage(file='resources/middleclick.png')
-        self.middleClickDown = tk.PhotoImage(file='resources/middleclickdown.png')
-        self.rightClick = tk.PhotoImage(file='resources/rightclick.png')
-        self.rightClickDown = tk.PhotoImage(file='resources/rightclickdown.png')
-        self.runningImg = tk.PhotoImage(file='resources/running.png')
-        self.stoppedImg = tk.PhotoImage(file='resources/stopped.png')
-        self.ledOff = tk.PhotoImage(file='resources/ledoff.png')
+        self.gripBar = tk.PhotoImage(file=resource_path('resources/bar.png'))
+        self.closeBox = tk.PhotoImage(file=resource_path('resources/close.png'))
+        self.closeHover = tk.PhotoImage(file=resource_path('resources/closehover.png'))
+        self.leftClick = tk.PhotoImage(file=resource_path('resources/leftclick.png'))
+        self.leftClickDown = tk.PhotoImage(file=resource_path('resources/leftclickdown.png'))
+        self.middleClick = tk.PhotoImage(file=resource_path('resources/middleclick.png'))
+        self.middleClickDown = tk.PhotoImage(file=resource_path('resources/middleclickdown.png'))
+        self.rightClick = tk.PhotoImage(file=resource_path('resources/rightclick.png'))
+        self.rightClickDown = tk.PhotoImage(file=resource_path('resources/rightclickdown.png'))
+        self.runningImg = tk.PhotoImage(file=resource_path('resources/running.png'))
+        self.stoppedImg = tk.PhotoImage(file=resource_path('resources/stopped.png'))
+        self.ledOff = tk.PhotoImage(file=resource_path('resources/ledoff.png'))
         
         self.barFrame = Frame(self, borderwidth=0)
         self.barFrame.pack(side=TOP, fill=BOTH, pady=1, expand=1)
@@ -176,6 +176,15 @@ def main():
     root = Tk()
     app = autoClicker(root)
     root.mainloop()
+    
+def resource_path(relative):
+    return os.path.join(
+        os.environ.get(
+            "_MEIPASS2",
+            os.path.abspath(".")
+        ),
+        relative
+    )
 
 if __name__ == "__main__":
     main() 
