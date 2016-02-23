@@ -33,17 +33,16 @@ class autoClicker(Frame):
         self.middleClickDown = tk.PhotoImage(file='resources/middleclickdown.png')
         self.rightClick = tk.PhotoImage(file='resources/rightclick.png')
         self.rightClickDown = tk.PhotoImage(file='resources/rightclickdown.png')
+        self.runningImg = tk.PhotoImage(file='resources/running.png')
+        self.stoppedImg = tk.PhotoImage(file='resources/stopped.png')
         
-        self.barFrame = Frame(self)
-        self.barFrame.pack(side=TOP, fill=BOTH, pady="1")
-        self.clickFrame = Frame(self, borderwidth=0, bg='white')
+        self.barFrame = Frame(self, borderwidth=0)
+        self.barFrame.pack(side=TOP, fill=BOTH, pady=1, expand=1)
+        self.clickFrame = Frame(self, borderwidth=0)
         self.clickFrame.pack(side=TOP, fill=BOTH, padx=(12,11), expand=1)
-
-        self.sliderScale = Scale(self, from_=0, to=1, resolution=.01, orient=HORIZONTAL, borderwidth=0, showvalue=0)
-        self.sliderScale.pack(side=TOP, fill="x", expand=1)
         
-        self.buttonFrame = Frame(self, borderwidth=0)
-        self.buttonFrame.pack(side=TOP, fill=BOTH, expand=1)
+        self.statusFrame = Frame(self, borderwidth=0)
+        self.statusFrame.pack(side=TOP, fill=BOTH, expand=1)
         
         self.grip = tk.Label(self.barFrame, image=self.gripBar, borderwidth=0)
         self.grip.pack(side=LEFT, fill="x", padx=(1,0))
@@ -69,13 +68,12 @@ class autoClicker(Frame):
         self.rightClickToggle.pack(side=LEFT, expand=1)
         self.rightClickToggle.bind("<Button-1>", self.rightToggle)
 
-        self.startButton = Button(self.buttonFrame, text="Start (F2)", relief=FLAT, activebackground="lightgrey", borderwidth=0)
-        self.startButton.pack(fill=BOTH, expand=1)
-        self.startButton.bind("<Button-1>", self.startClick)
-        self.startButton.bind("<<hotkey>>", self.startClick)
+        self.statusLabel = tk.Label(self.statusFrame, image=self.stoppedImg, borderwidth=0)
+        self.statusLabel.pack(side=LEFT, fill=BOTH, padx=1, pady=1)
+        self.statusLabel.bind("<<hotkey>>", self.startClick)
                 
         self.w = 115
-        self.h = 74
+        self.h = 56
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
@@ -91,7 +89,7 @@ class autoClicker(Frame):
         self.hk.register(('f2',), callback=self.callBack)
             
     def callBack(self, event):
-        self.startButton.event_generate("<<hotkey>>", when="tail")
+        self.statusLabel.event_generate("<<hotkey>>", when="tail")
         
     def leftToggle(self,event):
         if self.running == 0:
@@ -148,15 +146,11 @@ class autoClicker(Frame):
     def startClick(self, event):
         if self.running == 0 and not (self.leftclick == 0 and self.middleclick==0 and self.rightclick == 0):
             self.running = 1
-            event.widget.config(text="Stop (F2)")
-            x = self.parent.winfo_x() + (self.w / 2)
-            y = self.parent.winfo_y() + self.h + 50
-            pyautogui.moveTo(x, y)
+            event.widget.configure(image=self.runningImg)
             threading.Thread(target=self.startLoop, args=()).start()
         else:
             self.running = 0
-            event.widget.config(text="Start (F2)")
-        time.sleep(0.2)
+            event.widget.configure(image=self.stoppedImg)
         return
 
     def startLoop(self):
@@ -167,8 +161,6 @@ class autoClicker(Frame):
                 pyautogui.click(button="middle")
             if self.rightclick == 1:
                 pyautogui.click(button="right")
-            delay = self.sliderScale.get()
-            time.sleep(delay)
         return
     
 def main():
