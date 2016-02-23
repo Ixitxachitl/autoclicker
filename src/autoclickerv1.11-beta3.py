@@ -35,14 +35,13 @@ class autoClicker(Frame):
         self.rightClickDown = tk.PhotoImage(file='resources/rightclickdown.png')
         self.runningImg = tk.PhotoImage(file='resources/running.png')
         self.stoppedImg = tk.PhotoImage(file='resources/stopped.png')
+        self.ledOff = tk.PhotoImage(file='resources/ledoff.png')
         
         self.barFrame = Frame(self, borderwidth=0)
         self.barFrame.pack(side=TOP, fill=BOTH, pady=1, expand=1)
-        self.clickFrame = Frame(self, borderwidth=0)
-        self.clickFrame.pack(side=TOP, fill=BOTH, padx=(12,11), expand=1)
         
-        self.statusFrame = Frame(self, borderwidth=0)
-        self.statusFrame.pack(side=TOP, fill=BOTH, expand=1)
+        self.clickFrame = Frame(self, borderwidth=0)
+        self.clickFrame.pack(side=TOP, fill=BOTH, padx=(6,3), expand=1)
         
         self.grip = tk.Label(self.barFrame, image=self.gripBar, borderwidth=0)
         self.grip.pack(side=LEFT, fill="x", padx=(1,0))
@@ -57,23 +56,30 @@ class autoClicker(Frame):
         self.closeButton.bind("<Leave>", self.onLeave)
         
         self.leftClickToggle = tk.Label(self.clickFrame, image=self.leftClick, borderwidth=0)
-        self.leftClickToggle.pack(side=LEFT, expand=1)
+        self.leftClickToggle.pack(side=LEFT, expand=1, pady=(2,1))
         self.leftClickToggle.bind("<Button-1>", self.leftToggle)
         
         self.middleClickToggle = tk.Label(self.clickFrame, image=self.middleClick, borderwidth=0)
-        self.middleClickToggle.pack(side=LEFT, expand=1)
+        self.middleClickToggle.pack(side=LEFT, expand=1, pady=(2,1))
         self.middleClickToggle.bind("<Button-1>", self.middleToggle)
 
         self.rightClickToggle = tk.Label(self.clickFrame, image=self.rightClick, borderwidth=0)
-        self.rightClickToggle.pack(side=LEFT, expand=1)
+        self.rightClickToggle.pack(side=LEFT, expand=1, pady=(2,1))
         self.rightClickToggle.bind("<Button-1>", self.rightToggle)
+        
+        self.statusFrame = Frame(self.clickFrame, borderwidth=0)
+        self.statusFrame.pack(side=LEFT, fill=BOTH, expand=1)
 
-        self.statusLabel = tk.Label(self.statusFrame, image=self.stoppedImg, borderwidth=0)
-        self.statusLabel.pack(side=LEFT, fill=BOTH, padx=1, pady=1)
+        self.statusLabel = tk.Label(self.statusFrame, image=self.ledOff, borderwidth=0)
+        self.statusLabel.pack(side=TOP, fill=BOTH, padx=(3,0), pady=(0,1))
+        
         self.statusLabel.bind("<<hotkey>>", self.startClick)
+        
+        self.statusLabel2 = tk.Label(self.statusFrame, image=self.stoppedImg, borderwidth=0)
+        self.statusLabel2.pack(side=TOP, fill=BOTH, padx=(3,0), pady=1)
                 
         self.w = 115
-        self.h = 56
+        self.h = 37
 
         ws = self.winfo_screenwidth() # width of the screen
         hs = self.winfo_screenheight() # height of the screen
@@ -147,10 +153,13 @@ class autoClicker(Frame):
         if self.running == 0 and not (self.leftclick == 0 and self.middleclick==0 and self.rightclick == 0):
             self.running = 1
             event.widget.configure(image=self.runningImg)
+            self.statusLabel2.configure(image=self.ledOff)
             threading.Thread(target=self.startLoop, args=()).start()
         else:
             self.running = 0
-            event.widget.configure(image=self.stoppedImg)
+            event.widget.configure(image=self.ledOff)
+            self.statusLabel2.configure(image=self.stoppedImg)
+            
         return
 
     def startLoop(self):
