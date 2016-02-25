@@ -19,18 +19,22 @@ class autoClicker(Frame):
         self.topFrame1 = Toplevel()
         self.topFrame1.overrideredirect(True)
         self.topFrame1.config(bg="red", bd=0, height=2, width=50)
+        self.topFrame1.wm_attributes("-topmost", 1)
         self.topFrame1.withdraw()
         self.topFrame2 = Toplevel()
         self.topFrame2.overrideredirect(True)
         self.topFrame2.config(bg="red", bd=0, height=50, width=2)
+        self.topFrame2.wm_attributes("-topmost", 1)
         self.topFrame2.withdraw()
         self.topFrame3 = Toplevel()
         self.topFrame3.overrideredirect(True)
         self.topFrame3.config(bg="red", bd=0, height=2, width=50)
+        self.topFrame3.wm_attributes("-topmost", 1)
         self.topFrame3.withdraw()
         self.topFrame4 = Toplevel()
         self.topFrame4.overrideredirect(True)
         self.topFrame4.config(bg="red", bd=0, height=50, width=2)
+        self.topFrame4.wm_attributes("-topmost", 1)
         self.topFrame4.withdraw()
         
         self.running = 0
@@ -131,13 +135,13 @@ class autoClicker(Frame):
         except:
             logging.debug(" Bind Failed: Continuing...")
         try:
-            self.hk.register(('o',), callback=self.setSpot)
-            logging.debug(" o bound")
+            self.hk.register(('f7',), callback=self.setSpot)
+            logging.debug(" f7 bound")
         except:
             logging.debug(" Bind Failed: Continuing...")
         try:
-            self.hk.register(('p',), callback=self.returnSpot)
-            logging.debug(" p bound")
+            self.hk.register(('f8',), callback=self.returnSpot)
+            logging.debug(" f8 bound")
         except:
             logging.debug(" Bind Failed: Continuing...")
         return
