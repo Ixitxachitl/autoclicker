@@ -175,7 +175,7 @@ class autoClicker(Frame):
                 self.lastspoty = self.spoty
                 self.topFrame1.geometry('50x2+%d+%d' % (self.spotx - 25, self.spoty - 25))
                 self.topFrame2.geometry('2x50+%d+%d' % (self.spotx - 25, self.spoty - 25))
-                self.topFrame3.geometry('52x2+%d+%d' % (self.spotx - 25, self.spoty + 25))
+                self.topFrame3.geometry('50x2+%d+%d' % (self.spotx - 25, self.spoty + 25))
                 self.topFrame4.geometry('2x50+%d+%d' % (self.spotx + 23, self.spoty - 25))
                 self.topFrame1.deiconify()
                 self.topFrame2.deiconify()
