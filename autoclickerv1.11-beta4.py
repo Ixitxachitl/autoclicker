@@ -26,7 +26,7 @@ class autoClicker(Frame):
         self.topFrame2.withdraw()
         self.topFrame3 = Toplevel()
         self.topFrame3.overrideredirect(True)
-        self.topFrame3.config(bg="red", bd=0, height=2, width=52)
+        self.topFrame3.config(bg="red", bd=0, height=2, width=50)
         self.topFrame3.withdraw()
         self.topFrame4 = Toplevel()
         self.topFrame4.overrideredirect(True)
@@ -42,6 +42,7 @@ class autoClicker(Frame):
         self.spoty = 0
         self.lastspotx = 0
         self.lastspoty = 0
+        self.flagReturn = 0
                 
         self.parent.overrideredirect(True)
         self.parent.wm_attributes("-topmost", 1)
@@ -151,36 +152,40 @@ class autoClicker(Frame):
                 self.lastspoty = 0            
             self.spotx, self.spoty = pyautogui.position()
             if self.spotx == self.lastspotx and self.spoty == self.lastspoty:
-                self.lastspotx = self.spotx
-                self.lastspoty = self.spoty
-                self.spotx = 0
-                self.spoty = 0
                 logging.debug("--Spot Reset--")
                 logging.debug("spotx: %d -- %s", self.spotx, self.lastspotx)
                 logging.debug("spoty: %d -- %s", self.spoty, self.lastspoty)
+                self.lastspotx = self.spotx
+                self.lastspoty = self.spoty
+                self.spotx = 0
+                self.spoty = 0               
                 self.topFrame1.withdraw()
                 self.topFrame2.withdraw()
                 self.topFrame3.withdraw()
                 self.topFrame4.withdraw()
             else:
-                self.lastspotx = self.spotx
-                self.lastspoty = self.spoty
                 logging.debug("--Spot Move--")
                 logging.debug("spotx: %d -- %s", self.spotx, self.lastspotx)
                 logging.debug("spoty: %d -- %s", self.spoty, self.lastspoty)
+                self.lastspotx = self.spotx
+                self.lastspoty = self.spoty
                 self.topFrame1.geometry('50x2+%d+%d' % (self.spotx - 25, self.spoty - 25))
                 self.topFrame2.geometry('2x50+%d+%d' % (self.spotx - 25, self.spoty - 25))
                 self.topFrame3.geometry('52x2+%d+%d' % (self.spotx - 25, self.spoty + 25))
-                self.topFrame4.geometry('2x50+%d+%d' % (self.spotx + 25, self.spoty - 25))
+                self.topFrame4.geometry('2x50+%d+%d' % (self.spotx + 23, self.spoty - 25))
                 self.topFrame1.deiconify()
                 self.topFrame2.deiconify()
                 self.topFrame3.deiconify()
                 self.topFrame4.deiconify()
+        return
                 
     def returnSpot(self, event):
-        if self.spotx > 0 and self.spoty > 0:
-            pyautogui.moveTo(self.spotx, self.spoty)
-            
+        if not (self.spotx == 0 and self.spoty == 0):
+            if not (self.running == 1):
+                pyautogui.moveTo(self.spotx, self.spoty)
+            else:
+                self.flagReturn = 1
+                
     def callBack(self, event):
         self.statusLabel.event_generate("<<hotkey>>", when="tail")
         
@@ -244,7 +249,6 @@ class autoClicker(Frame):
             event.widget.configure(image=self.runningImg)
             self.statusLabel2.configure(image=self.ledOff)
             threading.Thread(target=self.startLoop, args=()).start()
-            #threading.Thread(target=self.checkGold, args=()).start()
         else:
             self.running = 0
             logging.debug("Stopped")
@@ -263,7 +267,7 @@ class autoClicker(Frame):
                     pyautogui.click(button="middle")
                 if self.rightclick == 1:
                     pyautogui.click(button="right")
-            elif self.spotx > 0 and self.spoty > 0:
+            elif not(self.spotx == 0 and self.spoty == 0):
                 self.positionX, self.positionY = pyautogui.position()
                 self.upperX = self.spotx + 25
                 self.lowerX = self.spotx - 25
@@ -276,34 +280,10 @@ class autoClicker(Frame):
                         pyautogui.click(button="middle")
                     if self.rightclick == 1:
                         pyautogui.click(button="right")
-            time.sleep(0.001)
+            if self.flagReturn == 1:
+                pyautogui.moveTo(self.spotx, self.spoty)
+                self.flagReturn = 0
         return
-
-"""    
-    def checkGold(self):
-        while self.running == 1:
-            try:
-                x, y = pyautogui.locateCenterOnScreen(self.goldCookie1)
-            except TypeError:
-                try:
-                    x, y = pyautogui.locateCenterOnScreen(self.goldCookie2)
-                except TypeError:
-                    try:
-                        x, y = pyautogui.locateCenterOnScreen(self.goldCookie3)
-                    except TypeError:
-                        try:
-                            x, y = pyautogui.locateCenterOnScreen(self.goldCookie4)
-                        except TypeError:
-                            x = 0
-                            y = 0
-            if not(x == 0 and y == 0):
-                oldx, oldy = pyautogui.position()
-                self.hold = 1
-                pyautogui.click(x, y)
-                pyautogui.moveTo(oldx, oldy)
-                self.hold = 0
-        return
-"""
 
 def main():
     root = Tk()
