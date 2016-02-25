@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['autoclickerv1.11-beta3.py'],
+a = Analysis(['autoclickerv1.11-beta4.py'],
              pathex=['Z:\\home\\noah\\autoclicker'],
              binaries=None,
              datas=None,
@@ -34,8 +34,8 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='autoclickerv1.11-beta3',
+          name='autoclickerv1.11-beta4',
           debug=False,
           strip=False,
           upx=True,
-          console=False , icon='resources\\autoclick.ico')
+          console=True , icon='resources\\autoclick.ico')

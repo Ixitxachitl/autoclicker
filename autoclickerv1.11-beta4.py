@@ -130,13 +130,13 @@ class autoClicker(Frame):
         except:
             logging.debug(" Bind Failed: Continuing...")
         try:
-            self.hk.register(('period',), callback=self.setSpot)
-            logging.debug(" period bound")
+            self.hk.register(('o',), callback=self.setSpot)
+            logging.debug(" o bound")
         except:
             logging.debug(" Bind Failed: Continuing...")
         try:
-            self.hk.register(('slash',), callback=self.returnSpot)
-            logging.debug(" slash bound")
+            self.hk.register(('p',), callback=self.returnSpot)
+            logging.debug(" p bound")
         except:
             logging.debug(" Bind Failed: Continuing...")
         return

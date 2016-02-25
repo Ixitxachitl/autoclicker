@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['autoclickerv1.11-beta3.py'],
+a = Analysis(['autoclickerv1.11-beta4.py'],
              pathex=['/home/noah/autoclicker'],
              binaries=None,
              datas=None,
@@ -14,7 +14,6 @@ a = Analysis(['autoclickerv1.11-beta3.py'],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher)
-             
 a.datas += [('resources/bar.png', '/home/noah/autoclicker/resources/bar.png', 'DATA')]
 a.datas += [('resources/close.png', '/home/noah/autoclicker/resources/close.png', 'DATA')]
 a.datas += [('resources/closehover.png', '/home/noah/autoclicker/resources/closehover.png', 'DATA')]
@@ -27,7 +26,6 @@ a.datas += [('resources/rightclickdown.png', '/home/noah/autoclicker/resources/r
 a.datas += [('resources/running.png', '/home/noah/autoclicker/resources/running.png', 'DATA')]
 a.datas += [('resources/stopped.png', '/home/noah/autoclicker/resources/stopped.png', 'DATA')]
 a.datas += [('resources/ledoff.png', '/home/noah/autoclicker/resources/ledoff.png', 'DATA')]
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -35,8 +33,8 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='autoclickerv1.11-beta3',
+          name='autoclickerv1.11-beta4',
           debug=False,
           strip=False,
           upx=True,
-          console=False )
+          console=True )
