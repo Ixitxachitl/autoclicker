@@ -1,6 +1,6 @@
 # autoclicker
+Usage:
 
-    Usage:
     1) Click on the mouse buttons you'd like to auto click
     2) (Optional) Move mouse to where you'd like to click and define the area with F7
     3) Press F2 to begin clicking
