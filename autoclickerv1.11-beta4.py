@@ -181,6 +181,7 @@ class autoClicker(Frame):
                 self.topFrame2.deiconify()
                 self.topFrame3.deiconify()
                 self.topFrame4.deiconify()
+            time.sleep(0.2)
         return
                 
     def returnSpot(self, event):
