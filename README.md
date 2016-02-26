@@ -1,10 +1,10 @@
 # autoclicker
 
 Usage:
-  1) Click on the mouse buttons you'd like to auto click
-  2) (Optional) Move mouse to where you'd like to click and define the area with F7
-  3) Press F2 to begin clicking
-  4) (Optional) Press F8 to return to defined area
+    1) Click on the mouse buttons you'd like to auto click
+    2) (Optional) Move mouse to where you'd like to click and define the area with F7
+    3) Press F2 to begin clicking
+    4) (Optional) Press F8 to return to defined area
 
 Designed to click on cookies: http://orteil.dashnet.org/cookieclicker/
 
