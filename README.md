@@ -1,7 +1,10 @@
 # autoclicker
 
-Download Executable and click Start to start clicking, move your mouse over Stop to stop.
-Note: Current version clicks left mouse button and than middle mouse button and after a (very) short dely repeats until the start/stop button or close button is pressed.
+Usage:
+  1) Click on the mouse buttons you'd like to auto click
+  2) (Optional) Move mouse to where you'd like to click and define the area with F7
+  3) Press F2 to begin clicking
+  4) (Optional) Press F8 to return to defined area
 
 Designed to click on cookies: http://orteil.dashnet.org/cookieclicker/
 
@@ -13,7 +16,7 @@ Requirements:
   Windows:
   
             Python for Windows:
-            (I used python 3.5 but any version of python 3.x should work or 2.x with some minor changes)
+            (I used python 3.5 but any version of python 3.x should work)
             https://www.python.org/downloads/
   
             Tcl/tk for Windows: 
@@ -26,6 +29,10 @@ Requirements:
             PyAutoGui:
             c:\path\to\pip install pillow
             c:\path\to\pip install pyautogui
+            
+            System_Hotkey
+            c:\path\to\pip install system_hotkey
+            + any required modules
   
   Ubuntu:
   
@@ -41,6 +48,7 @@ Requirements:
             PyAutoGui:
             pip3 install pillow
             pip3 install pyautogui
+            pip3 install system_hotkey
+            + any required modules
             
-Mac OS users: You can run this script directly by installing python 3.x, tkinter modual and pyautogui but as I do not have an osx device I am unable to pre-compile this for you and do not have detailed instructions.  That being said, I'm sure the instalation process is pretty strait forward and if someone with an osx device is willing to step forward i'd be happy to have someone compile it for me.  Because pyinstaller is not a cross compiler, in order to have an osx executable it must be compiled on the target device or a virtual environment such as the way I compile the windows executable using wine.
-If you notice any errors in my instalation process or have any tips let me know and I'll fix it, Thanks!
+Mac OS users: Newest version uses system_hotkey modual that does not currently support Mac OS, the script will run but without keybindings the current version cannot start and will require a workaround.
