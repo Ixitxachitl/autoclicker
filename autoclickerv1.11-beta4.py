@@ -3,7 +3,7 @@
 
 import pyautogui, time, threading, sys, os, logging
 from tkinter import *
-from system_hotkey import SystemHotkey
+from system_hotkey import *
 import tkinter as tk
 
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] %(message)s',)
@@ -128,7 +128,7 @@ class autoClicker(Frame):
                 
     def registerHotkeys(self):
         logging.debug("Binding Keys:")
-        self.hk = SystemHotkey()
+        self.hk = SystemHotkey(use_xlib=False, verbose=1)
         try:
             self.hk.register(('f2',), callback=self.callBack)
             logging.debug(" f2 bound")
