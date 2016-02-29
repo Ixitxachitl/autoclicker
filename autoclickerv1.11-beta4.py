@@ -114,11 +114,11 @@ class autoClicker(Frame):
         self.w = 115
         self.h = 37
 
-        ws = self.winfo_screenwidth() # width of the screen
-        hs = self.winfo_screenheight() # height of the screen
+        self.ws = self.winfo_screenwidth() # width of the screen
+        self.hs = self.winfo_screenheight() # height of the screen
 
-        x = (ws/2) - (self.w/2)
-        y = (hs/2) - (self.h/2)
+        x = (self.ws/2) - (self.w/2)
+        y = (self.hs/2) - (self.h/2)
 
         self.parent.geometry('%dx%d+%d+%d' % (self.w, self.h, x, y))
         self.parent.config(bg="black")
@@ -236,6 +236,14 @@ class autoClicker(Frame):
         deltay = event.y - self.parent.y
         x = self.parent.winfo_x() + deltax
         y = self.parent.winfo_y() + deltay
+        if x > (self.ws - 20 - self.w):
+            x = self.ws - self.w
+        elif x < 20:
+            x = 0
+        if y > (self.hs - 20 - self.h):
+            y = self.hs - self.h
+        elif y < 20:
+            y = 0
         self.parent.geometry("+%s+%s" % (x, y))
         
     def stopMove(self, event):
