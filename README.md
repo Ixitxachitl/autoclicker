@@ -48,6 +48,8 @@ Requirements:
             PyAutoGui:
             pip3 install pillow
             pip3 install pyautogui
+            
+            System Hotkey:
             pip3 install system_hotkey
             + any required modules
             
